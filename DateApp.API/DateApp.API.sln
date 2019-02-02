@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DateApp.API", "DateApp.API.csproj", "{FBD1C362-5B02-4234-83F9-0CBAF284BD99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DateApp-SPA", "..\DateApp-SPA\DateApp-SPA.csproj", "{90ABA432-EAF1-4311-8920-F3EB1AC102E8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBD1C362-5B02-4234-83F9-0CBAF284BD99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBD1C362-5B02-4234-83F9-0CBAF284BD99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBD1C362-5B02-4234-83F9-0CBAF284BD99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBD1C362-5B02-4234-83F9-0CBAF284BD99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90ABA432-EAF1-4311-8920-F3EB1AC102E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90ABA432-EAF1-4311-8920-F3EB1AC102E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90ABA432-EAF1-4311-8920-F3EB1AC102E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90ABA432-EAF1-4311-8920-F3EB1AC102E8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C38E1365-7E49-4208-9462-04AEC2C4F892}
+	EndGlobalSection
+EndGlobal

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DateApp.API.Migrations
 {
-    public partial class ExtendedUserClass : Migration
+    public partial class ExtendedUserClassCorrected : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace DateApp.API.Migrations
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
-                name: "County",
+                name: "Country",
                 table: "Users",
                 nullable: true);
 
@@ -99,7 +99,7 @@ namespace DateApp.API.Migrations
                 table: "Users");
 
             migrationBuilder.DropColumn(
-                name: "County",
+                name: "Country",
                 table: "Users");
 
             migrationBuilder.DropColumn(

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DateApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190207194551_ExtendedUserClass")]
-    partial class ExtendedUserClass
+    [Migration("20190208201502_ExtendedUserClassCorrected")]
+    partial class ExtendedUserClassCorrected
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,7 +47,7 @@ namespace DateApp.API.Migrations
 
                     b.Property<string>("City");
 
-                    b.Property<string>("County");
+                    b.Property<string>("Country");
 
                     b.Property<DateTime>("Created");
 

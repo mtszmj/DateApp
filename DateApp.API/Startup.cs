@@ -19,6 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using AutoMapper;
 
 namespace DateApp.API
 {
@@ -40,6 +41,7 @@ namespace DateApp.API
                     opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
             services.AddCors();
+            services.AddAutoMapper();
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IDatingRepository, DatingRepository>();
@@ -81,7 +83,7 @@ namespace DateApp.API
             }
 
             //app.UseHttpsRedirection(); // na razie wykomentowane - sluzy do zablokowania komunikacji http i wymuszenia https
-            // seeder.SeedUsers(); - zapelnianie bazy danych testowymi uzytkownikami
+            // seeder.SeedUsers(); //- zapelnianie bazy danych testowymi uzytkownikami
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();

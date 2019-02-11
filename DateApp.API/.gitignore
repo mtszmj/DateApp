@@ -3,6 +3,7 @@
 
 .vscode
 *.db
+appsettings.json
 
 # User-specific files
 *.suo

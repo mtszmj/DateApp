@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DateApp.API.Data;
 using DateApp.API.Dtos;
+using DateApp.API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DateApp.API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))] // loguj 'last active' dla kazdej z metod
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]

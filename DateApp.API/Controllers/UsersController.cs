@@ -6,6 +6,7 @@ using AutoMapper;
 using DateApp.API.Data;
 using DateApp.API.Dtos;
 using DateApp.API.Helpers;
+using DateApp.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -69,6 +70,33 @@ namespace DateApp.API.Controllers
                 return NoContent();
 
             throw new Exception($"Updating user {id} failed on save");
+        }
+
+        [HttpPost("{id}/like/{recipentId}")]
+        public async Task<IActionResult> LikeUser(int id, int recipentId) 
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            
+            var like = await _repo.GetLike(id, recipentId);
+            if (like != null)
+                return BadRequest("You already like this user");
+            
+            if (await _repo.GetUser(recipentId) == null)
+                return NotFound();
+            
+            like = new Like
+            {
+                LikerId = id,
+                LikeeId = recipentId
+            };
+
+            _repo.Add<Like>(like);
+
+            if(await _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("Failed to like user");
         }
     }
 }

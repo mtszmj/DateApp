@@ -44,7 +44,7 @@ namespace DateApp.API.Controllers
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
 
             var userToReturn = _mapper.Map<UserForDetailedDto>(createdUser);
-            // return StatusCode(201); // created and route - fix later
+            // return StatusCode(201); // created at route - fix later
             return CreatedAtRoute("GetUser", new {controller = "Users", id = createdUser.Id}, userToReturn); 
         }
 

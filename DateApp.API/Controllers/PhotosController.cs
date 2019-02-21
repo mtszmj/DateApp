@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace DateApp.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/users/{userId}/photos")]
     [ApiController]
     public class PhotosController : ControllerBase

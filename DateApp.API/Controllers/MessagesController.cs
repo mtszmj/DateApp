@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DateApp.API.Controllers
 {
     [ServiceFilter(typeof(LogUserActivity))] // loguj 'last active' dla kazdej z metod
-    [Authorize]
+    //[Authorize]
     [Route("api/users/{userId}/[controller]")]
     [ApiController]
     public class MessagesController : ControllerBase

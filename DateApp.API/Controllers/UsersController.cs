@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DateApp.API.Controllers
 {
     [ServiceFilter(typeof(LogUserActivity))] // loguj 'last active' dla kazdej z metod
-    [Authorize]
+    //[Authorize] - po uzyciu AddMvc [...] .RequireAuthenticatedUser() w Startup.cs - juz nie potrzeba tego atrybutu
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase

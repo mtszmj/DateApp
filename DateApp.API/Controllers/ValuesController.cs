@@ -11,7 +11,7 @@ namespace DateApp.API.Controllers
 {
     //                             values bierze sie z nazwy klasy: 'Values'Controller (konwencja)
     // http://localohost:5000/api/values
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
@@ -24,7 +24,7 @@ namespace DateApp.API.Controllers
         }
 
         // GET api/values
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetValues()
         {
@@ -34,7 +34,7 @@ namespace DateApp.API.Controllers
         }
 
         // GET api/values/5
-        [AllowAnonymous]
+        [Authorize(Roles = "Member")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)
         {

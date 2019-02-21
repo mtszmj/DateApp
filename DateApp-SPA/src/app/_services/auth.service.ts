@@ -29,8 +29,8 @@ export class AuthService {
           const user = response;
           if (user) {
             localStorage.setItem('token', user.token);
-            localStorage.setItem('user', JSON.stringify(user.user));
-            this.currentUser = user.user;
+            localStorage.setItem('user', JSON.stringify(user.userToReturn));
+            this.currentUser = user.userToReturn;
             this.decodedToken = this.jwtHelper.decodeToken(user.token);
             this.changeMemberPhoto(this.currentUser.photoUrl);
           }

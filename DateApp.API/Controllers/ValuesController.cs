@@ -24,7 +24,7 @@ namespace DateApp.API.Controllers
         }
 
         // GET api/values
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpGet]
         public async Task<IActionResult> GetValues()
         {

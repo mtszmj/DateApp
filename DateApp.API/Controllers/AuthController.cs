@@ -68,7 +68,7 @@ namespace DateApp.API.Controllers
 
                 return Ok(new
                 {
-                    token = GenerateJwtToken(appUser),
+                    token = GenerateJwtToken(appUser).Result,
                     userToReturn
                 });
             }

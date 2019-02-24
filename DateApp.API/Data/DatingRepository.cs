@@ -41,14 +41,20 @@ namespace DateApp.API.Data
 
         public async Task<Photo> GetPhoto(int id)
         {
-            var photo = await _context.Photos.FirstOrDefaultAsync(p => p.Id == id);
+            var photo = await _context.Photos.IgnoreQueryFilters()
+                .FirstOrDefaultAsync(p => p.Id == id);
             
             return photo;
         }
 
-        public async Task<User> GetUser(int id)
+        public async Task<User> GetUser(int id, bool isCurrentUser)
         {
-            var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
+            var query = _context.Users.Include(p => p.Photos).AsQueryable();
+            
+            if(isCurrentUser) {
+                query = query.IgnoreQueryFilters();
+            }
+            var user = await query.FirstOrDefaultAsync(u => u.Id == id);
 
             return user;
         }
@@ -159,6 +165,22 @@ namespace DateApp.API.Data
                 .ToListAsync();
 
             return messages;
+        }
+
+        
+
+        public async Task<User> GetUserWithUnapprovedPhotos(int id)
+        {
+            var user = await _context.Users.Include(p => p.Photos).IgnoreQueryFilters().FirstOrDefaultAsync(u => u.Id == id);
+
+            return user;
+        }
+
+        public async Task<PagedList<User>> GetUsersWithUnapprovedPhotos(UserParams userParams) {
+            var users = _context.Users.Include(u => u.Photos).IgnoreQueryFilters().AsQueryable();
+            users = users.Where(u => u.Photos.Any(p => !p.isApproved));
+
+            return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
         }
     }
 }

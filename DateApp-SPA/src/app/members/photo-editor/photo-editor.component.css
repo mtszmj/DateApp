@@ -4,10 +4,47 @@ img.img-thumbnail {
     margin-bottom: 2px;
 }
 
+img.img-unapproved {
+    opacity: 0.3;
+}
+
 .nv-file-over {
     border: dotted 4px red;
 }
 
 input[type=file] {
     color: transparent
+}
+
+.not-approved {
+    opacity: 0.2;
+}
+
+.img-wrapper {
+    position: relative;
+}
+
+.img-text {
+    position: absolute;
+    bottom: 30%;
+}
+
+.approved-photo {
+    position: absolute;
+    bottom: -30%;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    opacity: 0;
+}
+
+.unapproved-photo {
+    position: absolute;
+    bottom: 30%;
+    left: 15%;
+    margin-right: auto;
+    margin-left: auto;
+    opacity: 1;
+    color: red
 }

@@ -31,7 +31,7 @@ namespace DateApp.API.Controllers
         public async Task<IActionResult> GetUsers([FromQuery]UserParams userParams) 
         {   
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var userFromRepo = await _repo.GetUser(currentUserId);
+            var userFromRepo = await _repo.GetUser(currentUserId, true);
             userParams.UserId = currentUserId;
             if(string.IsNullOrEmpty(userParams.Gender))
             {
@@ -50,7 +50,14 @@ namespace DateApp.API.Controllers
         [HttpGet("{id}", Name="GetUser")]
         public async Task<IActionResult> GetUser(int id) 
         {
-            var user = await _repo.GetUser(id);
+            var isCurrentUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) == id;
+            var user = await _repo.GetUser(id, isCurrentUser);
+
+            // User user = null;
+            // if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //     user = await _repo.GetUser(id);
+            // else
+            //     user = await _repo.GetUserWithUnapprovedPhotos(id);
 
             var userToReturn = _mapper.Map<UserForDetailedDto>(user);
 
@@ -63,7 +70,7 @@ namespace DateApp.API.Controllers
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
             
-            var userFromRepo = await _repo.GetUser(id);
+            var userFromRepo = await _repo.GetUser(id, true);
 
             _mapper.Map(userForUpdateDto, userFromRepo);
             if(await _repo.SaveAll())
@@ -82,7 +89,7 @@ namespace DateApp.API.Controllers
             if (like != null)
                 return BadRequest("You already like this user");
             
-            if (await _repo.GetUser(recipentId) == null)
+            if (await _repo.GetUser(recipentId, false) == null)
                 return NotFound();
             
             like = new Like
@@ -97,6 +104,19 @@ namespace DateApp.API.Controllers
                 return Ok();
 
             return BadRequest("Failed to like user");
+        }
+
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpGet("Unapproved")]
+        public async Task<IActionResult> GetUsersWithUnapprovedPhotos([FromQuery]UserParams userParams) 
+        {   
+            var users = await _repo.GetUsersWithUnapprovedPhotos(userParams);
+
+            var usersToReturn = _mapper.Map<IEnumerable<UserForDetailedDto>>(users);
+
+            Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
+
+            return Ok(usersToReturn);
         }
     }
 }

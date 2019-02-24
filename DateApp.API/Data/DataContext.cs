@@ -25,6 +25,8 @@ namespace DateApp.API.Data
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<Photo>().HasQueryFilter(p => p.isApproved);
+
             builder.Entity<UserRole>(userRole => 
             {
                 userRole.HasKey(ur => new {ur.UserId, ur.RoleId});

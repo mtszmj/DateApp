@@ -40,6 +40,7 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { AdminService } from './_services/admin.service';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
+import { ModeratorService } from './_services/moderator.service';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -100,7 +101,8 @@ export function tokenGetter() {
       PreventUnsavedChanges,
       ListsResolver,
       MessagesResolver,
-      AdminService
+      AdminService,
+      ModeratorService
    ],
    entryComponents: [
       RolesModalComponent

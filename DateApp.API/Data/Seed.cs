@@ -38,6 +38,7 @@ namespace DateApp.API.Data
 
                 foreach (var user in users)
                 {
+                    user.Photos.SingleOrDefault().isApproved = true;
                     _userManager.CreateAsync(user, "password").Wait();
                     _userManager.AddToRoleAsync(user, "Member").Wait();
                 }

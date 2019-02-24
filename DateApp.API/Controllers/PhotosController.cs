@@ -57,7 +57,7 @@ namespace DateApp.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var userFromRepo = await _repo.GetUser(userId);
+            var userFromRepo = await _repo.GetUser(userId, true);
 
             var file = photoForCreationDto.File;
 
@@ -102,7 +102,7 @@ namespace DateApp.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var user = await _repo.GetUser(userId);
+            var user = await _repo.GetUser(userId, true);
 
             if(!user.Photos.Any(p => p.Id == id)) 
             {
@@ -115,7 +115,10 @@ namespace DateApp.API.Controllers
                 return BadRequest("This is already the main photo");
 
             var currentMainPhoto = await _repo.GetMainPhotoForUser(userId);
-            currentMainPhoto.IsMain = false;
+            if(currentMainPhoto != null)
+            {
+                currentMainPhoto.IsMain = false;
+            }
             photoFromRepo.IsMain = true;
             
             if(await _repo.SaveAll())
@@ -130,7 +133,7 @@ namespace DateApp.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var user = await _repo.GetUser(userId);
+            var user = await _repo.GetUserWithUnapprovedPhotos(userId);
 
             if(!user.Photos.Any(p => p.Id == id)) 
             {
